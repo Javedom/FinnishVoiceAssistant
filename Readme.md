@@ -55,10 +55,3 @@ To stop the program, say any of the following Finnish words:
 - `wave` - Handles WAV file operations
 - `python-dotenv` - Loads environment variables
 
-## License
-MIT License
-pydub
-pyaudio
-wave
-```
-
