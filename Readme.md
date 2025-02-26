@@ -1,57 +1,97 @@
-# Voice Assistant using OpenAI Whisper and gTTS
+# Voice Assistant with VAD & Persistent Conversations
 
-This is a Finnish-language voice assistant that uses OpenAI's Whisper API for speech recognition and gTTS (Google Text-to-Speech) for spoken responses. The assistant listens to user input, processes it with OpenAI's API, and responds with generated speech.
+This is a voice assistant project using **webrtcvad** for **voice activity detection (VAD)**, **OpenAI Whisper** for **speech-to-text**, and **gTTS** for **text-to-speech (TTS)**. It maintains conversation context using OpenAI's **threads API** and stores conversation history for persistence.
 
 ## Features
-- **Speech Recognition**: Uses OpenAI's Whisper API to transcribe spoken Finnish into text.
-- **Text-to-Speech**: Uses Google Text-to-Speech (gTTS) to convert text responses into spoken Finnish.
-- **Conversation Memory**: Maintains a conversation thread with OpenAI's API.
-- **Exit Commands**: Recognizes Finnish exit commands to terminate the program.
+- **Voice Activity Detection (VAD)**: Uses `webrtcvad` to detect speech and avoid unnecessary recording.
+- **Persistent Conversations**: Stores conversation history using OpenAI's **Threads API**.
+- **Modular Structure**: Clean and extendable object-oriented design.
+- **Enhanced TTS with Caching**: Stores generated TTS files to avoid redundant processing.
+- **User Experience Improvements**:
+  - Wake word detection (`"hei avustaja"`)
+  - Automatic listening for speech
+  - Graceful exit commands
+
+---
 
 ## Installation
+### 1. Clone the Repository
+```sh
+git clone https://github.com/javedom/FinnishVoiceAssistant.git
+cd voice-assistant
+```
 
-### Prerequisites
-- Python 3.8+
-- `ffmpeg` (required for audio processing with `pydub`)
+### 2. Create and Activate a Virtual Environment (Recommended)
+```sh
+python -m venv venv  # Create virtual environment
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate  # Windows
+```
 
-### Setup
-1. Clone this repository:
-   ```sh
-   git clone https://github.com/javedom/voice-assistant.git
-   cd voice-assistant
-   ```
-2. Install dependencies:
-   ```sh
-   pip install -r requirements.txt
-   ```
-3. Create a `.env` file and add your OpenAI API credentials:
-   ```ini
-   OPENAI_API_KEY=your_openai_api_key
-   OPENAI_ASSISTANT_ID=your_assistant_id
-   ```
-4. Ensure `ffmpeg` is installed and available in your system's PATH.
+### 3. Install Dependencies
+```sh
+pip install -r requirements.txt
+```
+
+### 4. Configure Environment Variables
+Create a `.env` file in the project directory and add your OpenAI API key:
+```
+OPENAI_API_KEY=your-api-key-here
+OPENAI_ASSISTANT_ID=your-assistant-id-here
+```
+
+---
 
 ## Usage
-Run the program with:
+Run the voice assistant:
 ```sh
 python main.py
 ```
 
-The assistant will greet you and start listening for voice commands. Speak into your microphone, and it will process your speech, respond accordingly, and continue the conversation.
+The assistant will start listening for speech. To stop the assistant, say an **exit command** (e.g., *"lopeta", "pois", "exit"*).
 
-### Exit Commands
-To stop the program, say any of the following Finnish words:
-- "lopeta"
-- "pois"
-- "exit"
-- "sulje"
+---
 
-## Dependencies
-- `openai` - Communicates with OpenAI API
-- `gtts` - Converts text to speech
-- `playsound` - Plays audio files
-- `pydub` - Handles audio conversion (MP3 to WAV)
-- `pyaudio` - Captures microphone input
-- `wave` - Handles WAV file operations
-- `python-dotenv` - Loads environment variables
+## Requirements
+- **Python 3.8+**
+- **Dependencies (installed via `requirements.txt`)**:
+  - `python-dotenv`
+  - `pyaudio`
+  - `webrtcvad`
+  - `openai`
+  - `gTTS`
+  - `playsound==1.2.2` *(for TTS playback)*
+  
+#### Additional Requirements for Some Systems:
+- **Linux Users**: Install `portaudio` package for PyAudio support:
+  ```sh
+  sudo apt-get install portaudio19-dev
+  ```
+- **Windows Users**: If facing PyAudio issues, install it manually:
+  ```sh
+  pip install pipwin
+  pipwin install pyaudio
+  ```
+
+---
+
+## Troubleshooting
+### 1. No sound output from TTS
+- Try installing `playsound==1.2.2` instead of newer versions:
+  ```sh
+  pip install playsound==1.2.2
+  ```
+
+### 2. Microphone not detected or no speech input
+- Check system audio settings to ensure the correct microphone is selected.
+- If using Windows, disable *Stereo Mix* in audio settings.
+
+### 3. OpenAI API errors
+- Ensure your `.env` file contains the correct **API key** and **assistant ID**.
+- Check your OpenAI account for rate limits or API key issues.
+
+
+
+
+
 
