@@ -5,3 +5,6 @@ playsound
 pydub
 pyaudio
 wave
+webrtcvad
+gTTS
+playsound==1.2.2
