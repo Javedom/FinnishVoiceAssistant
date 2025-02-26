@@ -1,0 +1,7 @@
+openai
+python-dotenv
+gtts
+playsound
+pydub
+pyaudio
+wave
