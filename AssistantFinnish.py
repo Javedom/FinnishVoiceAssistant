@@ -1,5 +1,4 @@
 """
-FinnishVoiceAssistant.py - Complete Voice Assistant with Microsoft Speech SDK
 
 Features:
 - Speech recognition with Voice Activity Detection (VAD)
