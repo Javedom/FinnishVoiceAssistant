@@ -50,7 +50,7 @@ SPEECH_REGION=westeurope
 Run the assistant with:
 
 ```sh
-python FinnishVoiceAssistant.py
+python AssistantFinnish.py
 ```
 
 ### Interaction
