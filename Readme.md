@@ -40,10 +40,10 @@ pip install -r requirements.txt
 
 3. Create a `.env` file in the project directory with the following content:
 ```
-OPENAI_API_KEY=your_openai_api_key
-OPENAI_ASSISTANT_ID=your_assistant_id
-SPEECH_KEY=your_microsoft_speech_key
-SPEECH_REGION=westeurope
+OPENAI_API_KEY='Your_openai_api_key_here'
+OPENAI_ASSISTANT_ID='Your_openai_assistant_id_here'
+SPEECH_KEY='Your_Azure_Speech_Key_Here'
+SPEECH_REGION='Azure_service_region_here'
 ```
 
 ## Configuration
@@ -67,11 +67,11 @@ SPEECH_REGION=westeurope
 Run the assistant:
 
 ```
-python FinnishVoiceAssistantTasks.py
+python finnish-voice-assistant.py
 ```
 
-- Say "hei avustaja" to activate voice commands
-- Or press Enter to type commands directly
+- Say commands out loud
+- Press Enter to type commands directly
 - Say "lopeta" to exit the application
 
 ## Command Examples
