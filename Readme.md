@@ -1,97 +1,100 @@
-# Voice Assistant with VAD & Persistent Conversations
+# Finnish Voice Assistant
 
-This is a voice assistant project using **webrtcvad** for **voice activity detection (VAD)**, **OpenAI Whisper** for **speech-to-text**, and **gTTS** for **text-to-speech (TTS)**. It maintains conversation context using OpenAI's **threads API** and stores conversation history for persistence.
+## Overview
+
+**FinnishVoiceAssistant** is a fully functional voice assistant designed for Finnish speakers. It leverages the power of OpenAI's Assistants API and Microsoft's Speech SDK for high-quality speech synthesis and recognition. The assistant supports wake-word detection, real-time voice recognition, and a conversation history cache for improved user experience.
 
 ## Features
-- **Voice Activity Detection (VAD)**: Uses `webrtcvad` to detect speech and avoid unnecessary recording.
-- **Persistent Conversations**: Stores conversation history using OpenAI's **Threads API**.
-- **Modular Structure**: Clean and extendable object-oriented design.
-- **Enhanced TTS with Caching**: Stores generated TTS files to avoid redundant processing.
-- **User Experience Improvements**:
-  - Wake word detection (`"hei avustaja"`)
-  - Automatic listening for speech
-  - Graceful exit commands
 
----
+- **Speech recognition** with Voice Activity Detection (VAD) using `webrtcvad`
+- **Microsoft Speech SDK** for high-quality Finnish Text-to-Speech (TTS)
+- **OpenAI Assistants API** for intelligent conversations
+- **Wake word detection** (e.g., "hei avustaja")
+- **Speech caching** for improved performance
+- **Error handling** and graceful fallback to beep sounds if TTS fails
 
 ## Installation
-### 1. Clone the Repository
-```sh
-git clone https://github.com/javedom/FinnishVoiceAssistant.git
-cd voice-assistant
-```
 
-### 2. Create and Activate a Virtual Environment (Recommended)
-```sh
-python -m venv venv  # Create virtual environment
-source venv/bin/activate  # Mac/Linux
-venv\Scripts\activate  # Windows
-```
+### Prerequisites
 
-### 3. Install Dependencies
+Ensure you have the following installed:
+- Python 3.8+
+- `pip`
+
+### Install Dependencies
+
+Clone the repository and install dependencies:
+
 ```sh
+# Clone repository
+git clone https://github.com/Javedom/FinnishVoiceAssistant.git
+cd FinnishVoiceAssistant
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment Variables
-Create a `.env` file in the project directory and add your OpenAI API key:
-```
-OPENAI_API_KEY=your-api-key-here
-OPENAI_ASSISTANT_ID=your-assistant-id-here
-```
+### Environment Variables
 
----
+Create a `.env` file in the root directory and set the following credentials:
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+OPENAI_ASSISTANT_ID=your_openai_assistant_id
+SPEECH_KEY=your_microsoft_speech_key
+SPEECH_REGION=westeurope
+```
 
 ## Usage
-Run the voice assistant:
+
+Run the assistant with:
+
 ```sh
-python main.py
+python FinnishVoiceAssistant.py
 ```
 
-The assistant will start listening for speech. To stop the assistant, say an **exit command** (e.g., *"lopeta", "pois", "exit"*).
+### Interaction
+- Say **"hei avustaja"** to activate the assistant.
+- Speak naturally in Finnish, and the assistant will respond.
+- Type a message instead if preferred.
+- Say **"lopeta"** or press `Ctrl+C` to exit.
 
----
+## Technical Details
 
-## Requirements
-- **Python 3.8+**
-- **Dependencies (installed via `requirements.txt`)**:
-  - `python-dotenv`
-  - `pyaudio`
-  - `webrtcvad`
-  - `openai`
-  - `gTTS`
-  - `playsound==1.2.2` *(for TTS playback)*
-  
-#### Additional Requirements for Some Systems:
-- **Linux Users**: Install `portaudio` package for PyAudio support:
-  ```sh
-  sudo apt-get install portaudio19-dev
-  ```
-- **Windows Users**: If facing PyAudio issues, install it manually:
-  ```sh
-  pip install pipwin
-  pipwin install pyaudio
-  ```
+### Speech Recognition
+- Uses `webrtcvad` for **Voice Activity Detection (VAD)** to recognize speech.
+- Supports **Microsoft Speech SDK** as an alternative speech recognizer.
+- Integrates OpenAI **Whisper** for high-accuracy transcription.
 
----
+### Text-to-Speech (TTS)
+- Utilizes **Microsoft Azure Cognitive Services** for high-quality Finnish speech synthesis.
+- Supports **SSML markup** for natural-sounding speech.
+- Implements **caching** to avoid redundant API calls.
+
+### Conversational AI
+- OpenAI's **Assistants API** manages responses.
+- Stores conversation history in `conversation_data.json`.
+- Ensures **error handling** and fallback mechanisms.
 
 ## Troubleshooting
-### 1. No sound output from TTS
-- Try installing `playsound==1.2.2` instead of newer versions:
-  ```sh
-  pip install playsound==1.2.2
-  ```
 
-### 2. Microphone not detected or no speech input
-- Check system audio settings to ensure the correct microphone is selected.
-- If using Windows, disable *Stereo Mix* in audio settings.
+### Audio Issues
+- Ensure your microphone is working.
+- Adjust **microphone sensitivity** in system settings.
+- Run the script with **administrator privileges** if permission errors occur.
 
-### 3. OpenAI API errors
-- Ensure your `.env` file contains the correct **API key** and **assistant ID**.
-- Check your OpenAI account for rate limits or API key issues.
+### Speech SDK Issues
+- Verify your **Azure Speech API key and region**.
+- Install the required SDK:
 
+```sh
+pip install azure-cognitiveservices-speech
+```
 
+### OpenAI API Issues
+- Ensure your **API key** is correct.
+- Check **OpenAI API rate limits**.
 
-
+   ```
 
 
