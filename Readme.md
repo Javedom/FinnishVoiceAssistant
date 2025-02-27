@@ -29,7 +29,7 @@ A versatile voice-controlled assistant for Windows that understands natural Finn
 
 1. Clone or download this repository:
 ```
-git clone https://github.com/yourusername/finnish-voice-assistant.git
+git clone https://github.com/Javedom/finnish-voice-assistant.git
 cd finnish-voice-assistant
 ```
 
