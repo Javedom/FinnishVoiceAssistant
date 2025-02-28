@@ -1,0 +1,12 @@
+azure-cognitiveservices-speech==1.30.0
+openai==1.6.0
+python-dotenv==1.0.0
+requests==2.31.0
+spacy==3.6.1
+difflib
+typing
+urllib3
+threading
+queue
+datetime
+re
