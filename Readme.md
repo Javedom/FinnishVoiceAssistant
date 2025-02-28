@@ -1,137 +1,150 @@
-# Finnish Voice Assistant
+# Finnish Voice Assistant (Suomalainen Ääniavustaja)
 
-A versatile voice-controlled assistant for Windows that understands natural Finnish commands, with advanced intent recognition and system control capabilities. Also can just chat with user.
+A specialized voice assistant optimized for Finnish language with advanced speech recognition, natural language processing, and system control capabilities.
 
 ## Features
 
-- **Voice Recognition with VAD** - Detects voice activity and transcribes speech using OpenAI Whisper
-- **Finnish Language Support** - Optimized for Finnish language comprehension and speech
-- **High-Quality Text-to-Speech** - Uses Microsoft Cognitive Services for natural Finnish speech
-- **Wake Word Detection** - Trigger with "hei avustaja" to start interactions
-- **OpenAI Integration** - Uses OpenAI Assistants API for conversation management
-- **Advanced Intent Classification** - Understands various ways to phrase commands in Finnish
-- **System Controls:**
-  - Open applications and websites
-  - Search the web
-  - Control volume and screen brightness
+- **Advanced Finnish Language Processing**
+  - Morphological analysis with spaCy (if available)
+  - Fallback rule-based Finnish lemmatizer
+  - Entity extraction and intent classification optimized for Finnish
+
+- **High-Quality Speech Recognition**
+  - Finnish-optimized Azure Speech SDK for accurate recognition
+  - Graceful fallback to simplified recognition when needed
+  - Keyboard input fallback for reliability
+
+- **Natural Language Understanding**
+  - Finnish-specific intent classification 
+  - Flexible command recognition with multiple phrasings
+  - Wake word detection optimized for Finnish ("hei avustaja")
+
+- **Finnish Service Integrations**
+  - Weather (simulated Finnish Meteorological Institute)
+  - News in Finnish
+  - Finnish holidays
+  - Public transport information
+
+- **System Control Capabilities**
+  - Open programs and applications
+  - Open websites and search the web
+  - Volume and brightness control
   - Power management (shutdown, restart, sleep)
-  - Create and edit text files
-  - Chat using ChatGPT
+  - Text file creation and editing
+
+- **Enhanced User Experience**
+  - High-quality Finnish text-to-speech with SSML optimization
+  - Speech caching for better performance
+  - Proper Finnish pronunciation of loanwords and numbers
+  - Error handling and graceful degradation
 
 ## Requirements
 
-- Windows operating system
 - Python 3.7 or higher
-- OpenAI API key
-- Microsoft Speech Services API key
-- Internet connection
+- Windows OS (for full functionality with winsound)
+- Azure Speech Services subscription (for speech recognition and TTS)
+- OpenAI API key (for the assistant integration)
 
 ## Installation
 
-1. Clone or download this repository:
-```
-git clone https://github.com/Javedom/finnish-voice-assistant.git
-cd finnish-voice-assistant
-```
+1. Clone this repository or download the source code
 
-2. Install required dependencies:
-```
-pip install -r requirements.txt
-```
+2. Install required packages:
+   ```
+   pip install -r requirements.txt
+   ```
 
-3. Create a `.env` file in the project directory with the following content:
-```
-OPENAI_API_KEY='Your_openai_api_key_here'
-OPENAI_ASSISTANT_ID='Your_openai_assistant_id_here'
-SPEECH_KEY='Your_Azure_Speech_Key_Here'
-SPEECH_REGION='Azure_service_region_here'
-```
+3. (Optional) Install spaCy with Finnish language model for enhanced language processing:
+   ```
+   pip install spacy
+   python -m spacy download fi_core_news_sm
+   ```
+
+4. Create a `.env` file in the project root with your API keys:
+   ```
+   OPENAI_API_KEY=your_openai_api_key
+   OPENAI_ASSISTANT_ID=your_openai_assistant_id
+   SPEECH_KEY=your_azure_speech_key
+   SPEECH_REGION=your_azure_speech_region
+   ```
+
+5. Run the assistant:
+   ```
+   python FinnishVoiceAssistant.py
+   ```
 
 ## Configuration
 
-### OpenAI Assistant Setup
+The application uses environment variables for configuration. You need to set these in a `.env` file:
 
-1. Visit the [OpenAI platform](https://platform.openai.com/)
-2. Create a new Assistant
-3. Configure it with Finnish language capability and your desired instructions
-4. Copy the Assistant ID to your `.env` file
-
-### Microsoft Speech Services
-
-1. Sign up for [Microsoft Azure](https://azure.microsoft.com/)
-2. Create a Speech Services resource
-3. Get your API key and region
-4. Add them to your `.env` file
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `OPENAI_ASSISTANT_ID`: ID of your OpenAI Assistant configured for Finnish language
+- `SPEECH_KEY`: Your Azure Cognitive Services Speech API key
+- `SPEECH_REGION`: Azure region for your Speech resource (e.g., "westeurope")
 
 ## Usage
 
-Run the assistant:
+1. **Starting the Assistant**:
+   - Run the script: `python FinnishVoiceAssistant.py`
+   - The assistant will initialize and wait for the wake word
 
-```
-python finnish-voice-assistant.py
-```
+2. **Wake Word Activation**:
+   - Say "hei avustaja" to activate the assistant
+   - Or press Enter to type your commands
 
-- Say commands out loud
-- Press Enter to type commands directly
-- Say "lopeta" to exit the application
+3. **Basic Commands**:
+   - Open programs: "avaa ohjelma notepad"
+   - Open websites: "avaa sivu yle.fi"
+   - Search the web: "hae googlesta sää Helsinki"
+   - Get help: "näytä komennot"
 
-## Command Examples
+4. **Finnish Services**:
+   - Weather: "mikä on sää Helsingissä"
+   - News: "kerro uutiset" or "uutisia aiheesta urheilu"
+   - Holidays: "milloin on seuraava pyhäpäivä"
+   - Transport: "miten pääsen Helsingistä Tampereelle"
 
-### Basic Controls
-- "Avaa ohjelma notepad" - Open Notepad
-- "Avaa sivu google.com" - Open Google website
-- "Hae googlesta sää Helsinki" - Search Google for weather in Helsinki
-- "Näytä komennot" - Show available commands
+5. **System Control**:
+   - Volume: "lisää äänenvoimakkuutta" or "äänenvoimakkuus 50 prosenttiin"
+   - Brightness: "laske kirkkautta" or "näytön kirkkaus 70"
+   - Power: "sammuta tietokone" or "mene lepotilaan"
 
-### System Controls
-- "Lisää äänenvoimakkuutta" - Increase volume
-- "Laske äänenvoimakkuutta" - Decrease volume
-- "Mykistä äänet" - Mute sound
-- "Aseta äänenvoimakkuus 70 prosenttiin" - Set volume to 70%
+6. **File Operations**:
+   - Create files: "luo tiedosto nimeltä muistiinpanot.txt"
+   - Edit files: "avaa tiedosto muistiinpanot.txt"
+   - List files: "listaa tiedostot"
 
-### Display Controls
-- "Nosta kirkkautta" - Increase brightness
-- "Laske näytön kirkkautta" - Decrease brightness
-- "Aseta kirkkaus 50 prosenttiin" - Set brightness to 50%
+7. **Exiting**:
+   - Say "lopeta" or type "exit" to quit the application
 
-### Power Management
-- "Sammuta tietokone" - Shutdown computer (with 60-second delay)
-- "Käynnistä uudelleen" - Restart computer
-- "Peruuta sammutus" - Cancel shutdown or restart
-- "Laita tietokone lepotilaan" - Put computer to sleep
-- "Kirjaudu ulos" - Log out
+## Speech Recognition Modes
 
-### File Management
-- "Luo tiedosto nimeltä kauppalista" - Create a text file named "kauppalista"
-- "Lue tiedosto muistiinpanot" - Read the contents of a file
-- "Lisää tekstiä tiedostoon kauppalista" - Append text to a file
-- "Korvaa tiedoston sisältö" - Replace file contents
-- "Poista tiedoston rivi numero 3" - Delete a specific line from a file
-- "Listaa tekstitiedostot" - List all text files
+The application uses a tiered approach to speech recognition:
 
-## Voice Assistant Prompt Configuration
+1. **Azure Speech SDK with Finnish Optimization** (default)
+   - Highest quality Finnish speech recognition
+   - Uses continuous recognition mode
 
-For best results, configure your OpenAI Assistant with instructions to:
-1. Respond only in Finnish
-2. Be conversational and helpful
-3. Provide concise, informative answers
+2. **Simplified Speech Recognition** (fallback)
+   - Uses English recognition model but attempts to recognize Finnish commands
+   - The assistant will inform you if this mode is active
+
+3. **Keyboard-Only Mode** (last resort)
+   - If speech recognition is unavailable
+   - Press Enter to type your commands
 
 ## Troubleshooting
 
-### Audio Issues
-- Ensure your microphone is connected and working
-- Check Windows privacy settings to allow microphone access
-- Verify there are no other applications using the microphone
+- **No speech recognition**: Check your microphone and Azure Speech API credentials
+- **Recognition quality issues**: Try speaking more clearly or typing commands
+- **"spaCy Finnish language model not found"**: Run `python -m spacy download fi_core_news_sm`
+- **Sound not working**: Verify your speakers and Azure credentials
+- **Error on startup**: Check your `.env` file has all required variables
 
-### API Connection Problems
-- Verify your internet connection
-- Check that your API keys are correct in the `.env` file
-- Ensure you have sufficient credits in your OpenAI account
+## Credits
 
-### System Command Failures
-- Run the program with administrator privileges for power management commands
-- Some laptops may not support brightness control via WMI
+This Finnish Voice Assistant combines several Azure and OpenAI technologies along with Finnish language optimizations to create a natural, responsive assistant for Finnish speakers.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License
