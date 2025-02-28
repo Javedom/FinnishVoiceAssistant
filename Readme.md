@@ -1,6 +1,6 @@
 # Finnish Voice Assistant
 
-A versatile voice-controlled assistant for Windows that understands natural Finnish commands, with advanced intent recognition and system control capabilities.
+A versatile voice-controlled assistant for Windows that understands natural Finnish commands, with advanced intent recognition and system control capabilities. Also can just chat with user.
 
 ## Features
 
@@ -16,6 +16,7 @@ A versatile voice-controlled assistant for Windows that understands natural Finn
   - Control volume and screen brightness
   - Power management (shutdown, restart, sleep)
   - Create and edit text files
+  - Chat using ChatGPT
 
 ## Requirements
 
